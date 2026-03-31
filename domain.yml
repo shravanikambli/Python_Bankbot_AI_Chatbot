@@ -1,0 +1,130 @@
+actions:
+- action_check_balance
+- action_transfer_money
+entities:
+- account_type
+- card_type
+- amount
+- account_number
+- sender_account
+- receiver_account
+- transfer_amount
+forms:
+  balance_form:
+    required_slots:
+    - account_number
+  transfer_form:
+    required_slots:
+    - sender_account
+    - receiver_account
+    - transfer_amount
+intents:
+- greet
+- goodbye
+- opening_hours
+- open_account
+- login_account
+- lost_card
+- loan_home
+- loan_personal
+- credit_cards
+- investments
+- digital_troubleshoot
+- kyc_update
+- chitchat
+- nlu_fallback
+- check_balance
+- transfer_money
+
+responses:
+  utter_ask_account_number:
+  - text: Please enter your account number to check balance.
+  utter_ask_anything_else:
+  - text: Is there anything else I can help you with?
+  utter_ask_receiver_account:
+  - text: Please enter the receiver account number.
+  utter_ask_sender_account:
+  - text: Please enter your account number.
+  utter_ask_transfer_amount:
+  - text: How much money would you like to transfer?
+
+  utter_chitchat:
+  - text: I am your banking assistant bot. I am here to help you with banking services.
+  utter_credit_cards:
+  - text: We offer various credit cards including cashback, travel rewards, and shopping
+      cards with exciting benefits.
+  utter_digital_help:
+  - text: If you are facing issues with mobile banking or login, please try resetting
+      your password or updating the app.
+  utter_fallback:
+  - text: Sorry, I didn't understand that. Could you please rephrase your question?
+  utter_goodbye:
+  - text: Thank you for visiting Global Digital Bank. Have a great day!
+  utter_greet:
+  - text: Welcome to Global Digital Bank. How can I assist you today?
+  utter_help_options:
+  - text: You can ask me about account opening, loans, credit cards, investments,
+      or banking services.
+  utter_home_loan:
+  - text: Our home loans offer attractive interest rates and flexible repayment options.
+      You can apply online or visit our branch for assistance.
+  utter_investments:
+  - text: You can invest in fixed deposits, mutual funds, and retirement plans through
+      our bank for secure financial growth.
+  utter_kyc_update:
+  - text: You can update your KYC details such as address, phone number, or email
+      by visiting a branch or using our online services.
+  utter_login_account:
+  - text: To login to your bank account, please visit our online banking portal and
+      enter your username and password.
+  utter_lost_card:
+  - text: If your card is lost or stolen, please block it immediately using our mobile
+      banking app or contact customer support.
+  utter_open_account:
+  - text: To open a bank account, you need a valid ID proof, address proof, and a
+      passport-size photograph. You can apply online or visit the nearest branch.
+  utter_opening_hours:
+  - text: Our bank branches are open from 9 AM to 5 PM Monday to Friday and 9 AM to
+      1 PM on Saturdays.
+  utter_personal_loan:
+  - text: Personal loans are available for various needs like weddings, travel, or
+      emergencies with quick approval.
+
+ 
+session_config:
+  carry_over_slots_to_new_session: true
+  session_expiration_time: 60
+slots:
+  account_number:
+    mappings:
+    - conditions:
+      - active_loop: balance_form
+        requested_slot: account_number
+      type: from_text
+    type: text
+  password:
+    mappings:
+    - type: from_text
+    type: text
+  receiver_account:
+    mappings:
+    - conditions:
+      - active_loop: transfer_form
+        requested_slot: receiver_account
+      type: from_text
+    type: text
+  sender_account:
+    mappings:
+    - conditions:
+      - active_loop: transfer_form
+        requested_slot: sender_account
+      type: from_text
+    type: text
+  transfer_amount:
+    mappings:
+    - conditions:
+      - active_loop: transfer_form
+        requested_slot: transfer_amount
+      type: from_text
+    type: text
+version: '3.1'

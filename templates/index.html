@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Chatbot</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #chatbox {
+            width: 400px;
+            max-width: 90%;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: #ffffff;
+        }
+
+        #chatHeader {
+            background: #0074D9;
+            color: white;
+            padding: 15px;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        #messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+
+        .message {
+            margin: 8px 0;
+            padding: 10px 15px;
+            border-radius: 20px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .user {
+            background: #0074D9;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+
+        .bot {
+            background: #e1e1e1;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+
+        #inputArea {
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+
+        #userInput {
+            flex: 1;
+            border: none;
+            padding: 15px;
+            font-size: 1em;
+            outline: none;
+        }
+
+        button {
+            background: #0074D9;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #005fa3;
+        }
+    </style>
+</head>
+<body>
+
+<div id="chatbox">
+    <div id="chatHeader">🏦  Bank Assistant</div>
+    <div id="messages"></div>
+    <div id="inputArea">
+        <input id="userInput" placeholder="Type your message..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+async function sendMessage() {
+    let input = document.getElementById("userInput").value.trim();
+    if (!input) return;
+
+    let messages = document.getElementById("messages");
+
+    // Show user message
+    let userMsg = document.createElement("div");
+    userMsg.classList.add("message", "user");
+    userMsg.textContent = input;
+    messages.appendChild(userMsg);
+    messages.scrollTop = messages.scrollHeight;
+
+    // Clear input
+    document.getElementById("userInput").value = "";
+
+    // Send message to Flask (which saves it and sends it to Rasa)
+    const response = await fetch("/send_query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input })
+    });
+
+    const data = await response.json();
+
+    // Show bot response
+    let botMsg = document.createElement("div");
+    botMsg.classList.add("message", "bot");
+    botMsg.textContent = data.response;
+    messages.appendChild(botMsg);
+    messages.scrollTop = messages.scrollHeight;
+}
+
+// Press Enter to send
+document.getElementById("userInput").addEventListener("keypress", function(e){
+    if(e.key === "Enter") sendMessage();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif; }
+body { display:flex; background:#f0f2f5; min-height:100vh; }
+
+/* --- Sidebar --- */
+.sidebar {
+    width:300px;
+    background:#1B1F3B; /* dark professional navy */
+    color:white;
+    display:flex;
+    flex-direction:column;
+    padding-top:20px;
+}
+.sidebar h2 { text-align:center; margin-bottom:30px; font-weight:700; font-size:24px; letter-spacing:1px; }
+.sidebar a { padding:20px 30px; color:white; text-decoration:none; font-weight:500; transition:0.3s; }
+.sidebar a:hover { background:#1B1F3B; cursor:pointer; }
+
+/* --- Top Bar --- */
+.topbar {
+    position: fixed;
+    left:300px;
+    right:0;
+    top:0;
+    height:60px;
+    background:#f8f9fa; /* light gray */
+    color:#1B1F3B;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 40px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    z-index:10;
+}
+.topbar h1 { font-size:22px; font-weight:700; text-align:center; width:100%; color:#1B1F3B; }
+.topbar button {
+    position:absolute;
+    right:40px;
+    background:#E53935; /* red logout */
+    border:none;
+    color:white;
+    padding:8px 18px;
+    font-size:15px;
+    border-radius:6px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.topbar button:hover { background:#B71C1C; }
+
+/* --- Main Content --- */
+.main {
+    flex:1;
+    padding:100px 40px 40px 40px;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap:30px;
+}
+
+/* --- Cards --- */
+.card {
+    padding:60px 30px;
+    border-radius:18px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.1);
+    text-align:center;
+    font-weight:500;
+    color:white;
+    background: linear-gradient(135deg, #4A90E2, #357ABD); /* uniform gradient */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover { 
+    transform: translateY(-5px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+.card p { font-size:18px; margin-bottom:15px; font-weight:500; }
+.card span { display:block; font-size:36px; margin-top:10px; font-weight:700; }
+
+/* --- Responsive --- */
+@media(max-width:768px){
+    body { flex-direction:column; }
+    .sidebar { width:100%; flex-direction:row; overflow-x:auto; }
+    .sidebar a { flex:1; text-align:center; }
+    .topbar { left:0; padding:0 20px; justify-content:center; }
+    .topbar button { right:20px; }
+    .main { margin-left:0; grid-template-columns: 1fr; padding:120px 20px 20px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Admin</h2>
+    <a href="/admin">Dashboard</a>
+    <a href="/training_data">Training Data</a>
+    <a href="/user_queries">User Queries</a>
+    <a href="/faqs">FAQs</a>
+    <a href="/analytics_page">Analytics</a>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+    <h1>Bank Admin</h1>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+    <div class="card">
+        <p>Total Queries</p>
+        <span id="t">0</span>
+    </div>
+    <div class="card">
+        <p>Success %</p>
+        <span id="s">0</span>
+    </div>
+    <div class="card">
+        <p>Intents</p>
+        <span id="i">0</span>
+    </div>
+    <div class="card">
+        <p>FAQs</p>
+        <span id="f">0</span>
+    </div>
+</div>
+
+<script>
+//to fetch dashboard card
+fetch("/DASHBOARD")
+.then(r=>r.json())
+.then(d=>{
+    document.getElementById("t").innerText=d.total;
+    document.getElementById("s").innerText=d.success;
+    document.getElementById("i").innerText=d.intents;
+    document.getElementById("f").innerText=d.faqs;
+});
+
+function logout(){
+    window.location.href="/logout";
+}
+</script>
+
+</body>
+</html>

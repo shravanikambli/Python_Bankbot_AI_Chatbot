@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>FAQs - Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif; }
+body { display:flex; background:#f0f2f5; min-height:100vh; }
+
+/* --- Sidebar --- */
+.sidebar {
+    width:300px;
+    background:#1B1F3B;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    padding-top:20px;
+}
+.sidebar h2 { text-align:center; margin-bottom:30px; font-weight:700; font-size:24px; }
+.sidebar a { padding:20px 30px; color:white; text-decoration:none; }
+.sidebar a:hover { background:#111; }
+
+/* --- Top Bar --- */
+.topbar {
+    position: fixed;
+    left:300px;
+    right:0;
+    top:0;
+    height:60px;
+    background:#f8f9fa;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+.topbar h1 { font-size:22px; font-weight:700; }
+.topbar button {
+    position:absolute;
+    right:40px;
+    background:#E53935;
+    border:none;
+    color:white;
+    padding:8px 18px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* --- Main Content --- */
+.main {
+    flex:1;
+    padding:100px 40px 40px 40px;
+}
+
+/* --- Flash Messages --- */
+.flash-container {
+    margin-bottom:15px;
+}
+.flash {
+    padding:12px 20px;
+    border-radius:8px;
+    margin-bottom:10px;
+    color:white;
+    font-weight:500;
+    animation: fadeIn 0.5s;
+}
+.flash.success { background:#4CAF50; }
+.flash.danger { background:#4CAF50; }
+
+@keyframes fadeIn {
+    from { opacity:0; transform:translateY(-5px); }
+    to { opacity:1; transform:translateY(0); }
+}
+
+/* --- FAQ Table --- */
+table { width:100%; border-collapse: collapse; margin-top:20px; }
+th, td { padding:12px; border:1px solid #ccc; }
+th { background:#0074D9; color:white; }
+
+/* --- Form --- */
+form {
+    margin-bottom:20px;
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+input, textarea {
+    width:100%;
+    padding:8px;
+    margin:5px 0;
+}
+button {
+    padding:8px 12px;
+    background:#0074D9;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+button:hover { background:#005fa3; }
+
+/* --- Responsive --- */
+@media(max-width:768px){
+    body { flex-direction:column; }
+    .sidebar { width:100%; flex-direction:row; }
+    .sidebar a { flex:1; text-align:center; }
+    .topbar { left:0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Admin</h2>
+    <a href="/admin">Dashboard</a>
+    <a href="/training_data">Training Data</a>
+    <a href="/user_queries">User Queries</a>
+    <a href="/faqs">FAQs</a>
+    <a href="/analytics_page">Analytics</a>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+    <h1>FAQs</h1>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <h2>FAQs (Knowledge Base)</h2>
+
+    <!-- ✅ FLASH MESSAGE HERE -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-container">
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Add FAQ -->
+    <form method="POST" action="/add_faq">
+        <label>Question:</label>
+        <input type="text" name="question" required>
+
+        <label>Answer:</label>
+        <textarea name="answer" rows="3" required></textarea>
+
+        <button type="submit">Add FAQ</button>
+    </form>
+
+    <!-- Table -->
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Question</th>
+            <th>Answer</th>
+            <th>Action</th>
+        </tr>
+
+        {% for faq in faqs %}
+        <tr>
+            <td>{{ faq.id }}</td>
+            <td>{{ faq.question }}</td>
+            <td>{{ faq.answer }}</td>
+            <td>
+                <a href="/delete_faq/{{ faq.id }}">
+                    <button>Delete</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+
+<script>
+function logout(){
+    window.location.href="/logout";
+}
+
+/* ✅ Auto-hide flash */
+setTimeout(() => {
+    let flash = document.querySelector('.flash-container');
+    if (flash) {
+        flash.style.display = 'none';
+    }
+}, 3000);
+</script>
+
+</body>
+</html>

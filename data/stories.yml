@@ -1,0 +1,85 @@
+stories:
+- steps:
+  - intent: greet
+  - action: utter_greet
+  story: greeting conversation
+- steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: opening_hours
+  - action: utter_opening_hours
+  - action: utter_ask_anything_else
+  story: user asks bank opening hours
+- steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: open_account
+  - action: utter_open_account
+  - action: utter_ask_anything_else
+  story: user wants to open bank account
+- steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: login_account
+  - action: utter_login_account
+  - action: utter_ask_anything_else
+  story: user login to account
+- steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: lost_card
+  - action: utter_lost_card
+  - action: utter_ask_anything_else
+  story: user lost card
+- steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: loan_home
+  - action: utter_home_loan
+  - action: utter_ask_anything_else
+  story: user asks home loan
+- steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: loan_personal
+  - action: utter_personal_loan
+  - action: utter_ask_anything_else
+  story: user asks personal loan
+- steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: credit_cards
+  - action: utter_credit_cards
+  - action: utter_ask_anything_else
+  story: user asks credit cards
+- steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: investments
+  - action: utter_investments
+  - action: utter_ask_anything_else
+  story: user asks investment options
+- steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: digital_troubleshoot
+  - action: utter_digital_help
+  - action: utter_ask_anything_else
+  story: digital banking issue
+- steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: kyc_update
+  - action: utter_kyc_update
+  - action: utter_ask_anything_else
+  story: user wants KYC update
+- steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: chitchat
+  - action: utter_chitchat
+  - action: utter_ask_anything_else
+  story: chitchat conversation
+
+
+version: '3.1'

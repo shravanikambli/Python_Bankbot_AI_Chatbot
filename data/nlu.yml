@@ -1,0 +1,733 @@
+nlu:
+- examples: '- hello
+
+    - hi
+
+    - hey
+
+    - hey there
+
+    - hello there
+
+    - good morning
+
+    - good afternoon
+
+    - good evening
+
+    - greetings
+
+    - hi there
+
+    - hello bot
+
+    - hey bot
+
+    - hi assistant
+
+    - hello assistant
+
+    - nice to meet you
+
+    - hi how are you
+
+    - hello how are you
+
+    - hey how are you
+
+    - is anyone there
+
+    - can you help me
+
+    - good day
+
+    - hi buddy
+
+    - hello friend
+
+    - help me
+
+    '
+  intent: greet
+- examples: '- bye
+
+    - bye bye
+
+    - goodbye
+
+    - see you later
+
+    - see you soon
+
+    - exit
+
+    - quit
+
+    - stop
+
+    - catch you later
+
+    - talk to you later
+
+    - have a nice day
+
+    - have a great day
+
+    - thanks bye
+
+    - ok bye
+
+    - alright bye
+
+    - I am leaving
+
+    - I need to go
+
+    - I have to go
+
+    - see you
+
+    - goodbye for now
+
+    - end chat
+
+    - close chat
+
+    - that''s all bye
+
+    '
+  intent: goodbye
+- examples: '- what time do you open?
+
+    - what time does the bank open?
+
+    - when do you open?
+
+    - when does the branch open?
+
+    - what are your opening hours?
+
+    - what are your working hours?
+
+    - what are the bank timings?
+
+    - branch timings
+
+    - bank timings
+
+    - sunday hours
+
+    - saturday hours
+
+    - are you open on sunday?
+
+    - are you open on saturday?
+
+    - what time do you close?
+
+    - what is the closing time?
+
+    - when do you close?
+
+    - what are today''s timings?
+
+    - what time is the bank open today?
+
+    - tell me the bank schedule
+
+    - what are your business hours?
+
+    - when is the bank available?
+
+    - opening time of the bank
+
+    - closing time of the bank
+
+    '
+  intent: opening_hours
+- examples: '- I want to open a [savings](account_type) account
+
+    - open a [current](account_type) account
+
+    - start a [student](account_type) account
+
+    - how to open bank account
+
+    - requirements for account opening
+
+    - I want to create a bank account
+
+    - help me open a bank account
+
+    - can I open a new account
+
+    - I need a bank account
+
+    - how can I open an account
+
+    - I would like to open a bank account
+
+    - open account
+
+    - create new account
+
+    - start a new bank account
+
+    - bank account opening process
+
+    - what documents are needed to open account
+
+    - I want to start a savings account
+
+    - open new savings account
+
+    - I want to open an account in your bank
+
+    - guide me to open account
+
+    - account opening procedure
+
+    - how do I create a savings account
+
+    - I need to open a current account
+
+    - start savings account
+
+    - open my bank account
+
+    '
+  intent: open_account
+- examples: '- I want to login
+
+    - login to my bank account
+
+    - sign in to my account
+
+    - log into my account
+
+    - help me login
+
+    - I need to login to my account
+
+    - allow me to sign in
+
+    - how do I login
+
+    - login
+
+    - sign in
+
+    - account login
+
+    - access internet banking
+
+    - login to net banking
+
+    - open internet banking
+
+    - sign in to online banking
+
+    - login to banking portal
+
+    '
+  intent: login_account
+- examples: '- I lost my [credit](card_type) card
+
+    - my [debit](card_type) card is stolen
+
+    - block my card
+
+    - someone used my card
+
+    - I cannot find my card
+
+    - my card is missing
+
+    - I lost my debit card
+
+    - I lost my credit card
+
+    - please block my card
+
+    - my card was stolen
+
+    - someone stole my card
+
+    - unauthorized transaction on my card
+
+    - someone is using my card
+
+    - I think my card is stolen
+
+    - help me block my card
+
+    - I misplaced my card
+
+    - I dropped my card somewhere
+
+    - my debit card is missing
+
+    - my credit card is missing
+
+    - stop my card immediately
+
+    - disable my card
+
+    - block my debit card
+
+    - block my credit card
+
+    - my card is not with me
+
+    - I lost my ATM card
+
+    - I cannot find my debit card
+
+    '
+  intent: lost_card
+- examples: '- apply for home loan
+
+    - housing loan interest
+
+    - mortgage rates
+
+    - home loan eligibility
+
+    - I want to apply for a home loan
+
+    - how can I get a home loan
+
+    - what is the interest rate for home loan
+
+    - tell me about home loan
+
+    - how to apply for housing loan
+
+    - home loan requirements
+
+    - what documents are needed for home loan
+
+    - home loan process
+
+    - can I get a housing loan
+
+    - I need a loan to buy a house
+
+    - loan for buying a home
+
+    - I want a house loan
+
+    - check my home loan eligibility
+
+    - what is the home loan rate
+
+    - mortgage loan details
+
+    - how much home loan can I get
+
+    - housing finance options
+
+    - bank home loan information
+
+    - help me apply for a home loan
+
+    - guide me for home loan
+
+    - housing loan application
+
+    - can I apply for mortgage loan
+
+    '
+  intent: loan_home
+- examples: '- I need a personal loan
+
+    - loan for wedding
+
+    - instant loan
+
+    - personal loan interest
+
+    - I want a personal loan
+
+    - how to apply for personal loan
+
+    - personal loan details
+
+    - what is the interest rate for personal loan
+
+    - can I get a personal loan
+
+    - apply for personal loan
+
+    - quick personal loan
+
+    - urgent personal loan
+
+    - loan for medical  emergency
+
+    - loan for education
+
+    - loan for travel
+
+    - personal loan eligibility
+
+    - how much personal loan can I get
+
+    - personal loan requirements
+
+    - documents required for personal loan
+
+    - bank personal loan information
+
+    - guide me for personal loan
+
+    - help me apply for personal loan
+
+    - personal finance loan
+
+    - short term personal loan
+
+    - I want to take a personal loan
+
+    - need money loan
+
+    - personal borrowing loan
+
+    '
+  intent: loan_personal
+- examples: '- types of credit cards
+
+    - cashback credit card
+
+    - travel reward card
+
+    - card annual fees
+
+    - what credit cards do you offer
+
+    - tell me about credit cards
+
+    - available credit cards
+
+    - best credit card
+
+    - which credit card is best
+
+    - credit card benefits
+
+    - credit card features
+
+    - how to apply for credit card
+
+    - apply for a credit card
+
+    - get a new credit card
+
+    - credit card interest rate
+
+    - charges for credit card
+
+    - credit card eligibility
+
+    - documents required for credit card
+
+    - compare credit cards
+
+    - credit card offers
+
+    - rewards credit card
+
+    - shopping credit card
+
+    - student credit card
+
+    - premium credit card
+
+    - bank credit card details
+
+    '
+  intent: credit_cards
+- examples: '- invest [50000](amount) in fixed deposit
+
+    - mutual fund options
+
+    - retirement investment
+
+    - create FD of [20000](amount)
+
+    - I want to invest money
+
+    - how can I start investing
+
+    - investment options in bank
+
+    - fixed deposit interest rates
+
+    - open a fixed deposit
+
+    - create a fixed deposit account
+
+    - start an FD
+
+    - invest in mutual funds
+
+    - mutual fund plans
+
+    - retirement savings plan
+
+    - long term investment plan
+
+    - short term investment options
+
+    - safe investment options
+
+    - where should I invest my money
+
+    - bank investment schemes
+
+    - start SIP investment
+
+    - investment plans for future
+
+    - best investment plan
+
+    - how to invest in FD
+
+    - open FD account
+
+    - deposit money in FD
+
+    '
+  intent: investments
+- examples: '- app not working
+
+    - login error
+
+    - forgot password
+
+    - mobile banking crash
+
+    - website down
+
+    - I cannot login to my account
+
+    - login is not working
+
+    - bank app is not opening
+
+    - mobile banking app not responding
+
+    - I forgot my internet banking password
+
+    - reset my password
+
+    - OTP not received
+
+    - I am not getting OTP
+
+    - online banking not working
+
+    - net banking issue
+
+    - website is not loading
+
+    - server error while login
+
+    - app keeps crashing
+
+    - I cannot access my account
+
+    - login failed
+
+    - my account is locked
+
+    - error while logging in
+
+    - unable to sign in
+
+    - password reset problem
+
+    - bank website showing error
+
+    - I can''t open the banking app
+
+    '
+  intent: digital_troubleshoot
+- examples: '- update my address
+
+    - change phone number
+
+    - kyc verification
+
+    - update email address
+
+    - I want to update my KYC
+
+    - how can I update my KYC details
+
+    - update my contact information
+
+    - change my registered mobile number
+
+    - change my email in bank account
+
+    - modify my personal details
+
+    - update my bank profile details
+
+    - update my PAN details
+
+    - update my Aadhaar details
+
+    - change address in my account
+
+    - update my identity proof
+
+    - how to update my bank KYC
+
+    - upload new KYC documents
+
+    - update my registered email
+
+    - change my contact number in bank
+
+    - correct my personal details
+
+    - update my account information
+
+    - I need to update my bank details
+
+    '
+  intent: kyc_update
+- examples: '- how are you
+
+    - who are you
+
+    - tell me a joke
+
+    - what is your name
+
+    - how are you doing
+
+    - how is your day
+
+    - are you a bot
+
+    - what can you do
+
+    - tell me something funny
+
+    - say a joke
+
+    - do you know any joke
+
+    - what should I call you
+
+    - introduce yourself
+
+    - what is your job
+
+    - what do you do
+
+    - are you real
+
+    - are you human
+
+    - what services do you provide
+
+    - what can you help me with
+
+    - tell me about yourself
+
+    - hi bot
+
+    - are you a banking bot
+
+    '
+  intent: chitchat
+- examples: '- asdfgh
+
+    - random words
+
+    - blah blah
+
+    - qwerty
+
+    - zxcvbn
+
+    - hjklkjh
+
+    - nonsense text
+
+    - something random
+
+    - unknown command
+
+    - ajshdjkash
+
+    - sdjkhfskjdf
+
+    - gibberish
+
+    - meaningless input
+
+    - some random message
+
+    - jhgbj
+
+    - hgjk
+
+    - bakdsf
+
+    - kjhdfkjh
+
+    '
+  intent: nlu_fallback
+- examples: '- check my balance
+
+    - what is my account balance
+
+    - show my balance
+
+    - balance inquiry
+
+    - check bank balance
+
+    - how much money do I have
+
+    - show my account balance
+
+    - can you check my balance
+
+    - tell me my bank balance
+
+    - balance please
+
+    - check available balance
+
+    - what is my current balance
+
+    - show available funds
+
+    - how much balance is left
+
+    '
+  intent: check_balance
+- examples: '- transfer money
+
+    - send money
+
+    - I want to transfer money
+
+    - transfer funds
+
+    - send money to another account
+
+    - make a money transfer
+
+    - transfer money to someone
+
+    - move money to another account'
+  intent: transfer_money
+
+version: '3.1'

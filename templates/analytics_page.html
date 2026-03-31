@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Analytics</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif; }
+
+body { display:flex; background:#f0f2f5; min-height:100vh; }
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    background:#1B1F3B;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    padding-top:20px;
+}
+.sidebar h2 { text-align:center; margin-bottom:30px; font-size:24px; }
+.sidebar a {
+    padding:20px 30px;
+    color:white;
+    text-decoration:none;
+}
+.sidebar a:hover { background:#2c2f5a; }
+
+/* Topbar */
+.topbar {
+    position: fixed;
+    left: 300px;
+    right: 0;
+    top: 0;
+    height: 60px;
+    background:#f8f9fa;
+    color:#1B1F3B;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 40px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    z-index:10;
+}
+.topbar h1 { font-size:22px; font-weight:700; text-align:center; width:100%; }
+.topbar button {
+    position:absolute;
+    right:40px;
+    background:#E53935;
+    border:none;
+    color:white;
+    padding:8px 18px;
+    font-size:15px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* Main */
+.main {
+    position: absolute;
+    top: 60px;
+    left: 300px;
+    right: 0;
+    bottom: 0;
+    padding: 20px 40px;
+    overflow-y: auto;
+}
+
+/* Export button */
+.export-btn {
+    background:#007bff;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+/* Charts */
+.charts {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+}
+
+.chart-box {
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.full {
+    grid-column:1 / span 2;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>Admin</h2>
+    <a href="/admin">Dashboard</a>
+    <a href="/training_data">Training Data</a>
+    <a href="/user_queries">User Queries</a>
+    <a href="/faqs">FAQs</a>
+    <a href="/analytics_page">Analytics</a>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+    <h1>Analytics</h1>
+    <button onclick="logout()">Logout</button>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+<!-- ✅ Export Button -->
+<button class="export-btn" onclick="exportAnalytics()">
+    Export Analytics CSV
+</button>
+
+<div class="charts">
+
+<div class="chart-box">
+    <h3>Top Intents</h3>
+    <canvas id="barChart"></canvas>
+</div>
+
+<div class="chart-box">
+    <h3>Intent Distribution</h3>
+    <canvas id="pieChart"></canvas>
+</div>
+
+<div class="chart-box full">
+    <h3>Daily Queries (Last 14 Days)</h3>
+    <canvas id="lineChart"></canvas>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// Load charts
+fetch("/analytics_data")
+.then(r=>r.json())
+.then(data=>{
+
+    let labels = data.intents.map(i => i.intent);
+    let counts = data.intents.map(i => i.count);
+
+    // Bar Chart
+    new Chart(document.getElementById("barChart"), {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Top Intents",
+                data: counts
+            }]
+        }
+    });
+
+    // Pie Chart
+    new Chart(document.getElementById("pieChart"), {
+        type: "pie",
+        data: {
+            labels: labels,
+            datasets: [{
+                data: counts
+            }]
+        },
+        options: {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            let value = context.raw;
+                            let percentage = ((value / total) * 100).toFixed(1);
+
+                            return context.label + ": " + percentage + "%";
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Line Chart
+    new Chart(document.getElementById("lineChart"), {
+        type: "line",
+        data: {
+            labels: data.daily.map(d => d.date),
+            datasets: [{
+                label: "Daily Queries",
+                data: data.daily.map(d => d.count)
+            }]
+        }
+    });
+
+});
+
+// ✅ Export function
+function exportAnalytics(){
+    window.location.href = "/export_analytics";
+}
+
+// Logout
+function logout(){
+    window.location.href = "/logout";
+}
+
+</script>
+
+</body>
+</html>
